@@ -4,11 +4,11 @@ import {ProductService} from "../../service/product.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({
-  selector: 'app-product-edit',
-  templateUrl: './product-edit.component.html',
-  styleUrls: ['./product-edit.component.css']
+  selector: 'app-product-delete',
+  templateUrl: './product-delete.component.html',
+  styleUrls: ['./product-delete.component.css']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductDeleteComponent implements OnInit {
 
   productForm: FormGroup = new FormGroup({
     id: new FormControl(),
@@ -35,13 +35,14 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-   getProduct(id: number) {
+  getProduct(id: number) {
     return this.productService.findById(id);
   }
 
-  updateProduct(id: number) {
+  deleteProduct(id: number) {
     const product = this.productForm.value;
-    this.productService.updateProduct(id, product);
-    alert('Cập nhật thành công');
+    this.productService.deleteProduct(id);
+    alert('Delete thành công');
   }
+
 }
