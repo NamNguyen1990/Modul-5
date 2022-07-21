@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a routerLink="/product/list">Danh sách sản phẩm</a>
+<!--              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+            </li>
+            <li class="nav-item">
+              <a routerLink="/product/create" data-toggle="modal" data-target="#exampleModal" >Tạo sản phẩm mới</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                 aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled">Disabled</a>
+            </li>
+
+
+            <form class="form-inline my-2 my-lg-0" [formGroup]="productForm" (ngSubmit)="findByPriceBetween()">
+              <input class="form-control mr-sm-2" type="search" placeholder="khoảng giá 1" aria-label="Search"
+                     id="from" formControlName='from'>
+              <input class="form-control mr-sm-2" type="search" placeholder="khoảng giá 2" aria-label="Search"
+                     id="to" formControlName='to'>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm theo khoảng giá</button>
+
+            </form>
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0" [formGroup]="productForm" (ngSubmit)="findByName()">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Name" aria-label="Search"
+                   id="search-name" formControlName='name'>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <h3 style="text-align: center">Danh sách các loại</h3>
+      <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Category</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listCategory; index as i">
+              <td>{{i + 1}}</td>
+              <td (click)="searchByCategoryId(item.id)">{{item.name}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-9">
+      <h3 style="margin-left: 200px">Danh sách sản phẩm</h3>
+      <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Category</th>
+          <th scope="col">Image</th>
+          <th scope="col">Chỉnh sửa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of list; index as i">
+          <td>{{i + 1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.category.name}}</td>
+          <td><img src="{{item.image}}" style="width: 100px"></td>
+          <td><a [routerLink]="['/product/edit',item.id]" data-toggle="modal" data-target="#exampleModal1"> Edit</a></td>
+<!--          <td><a [routerLink]="['/product/delete',item.id]"> Delete</a></td>-->
+          <td><button (click)="deleteProduct(item.id)">Xóa</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!--<h1>Danh sách sản phẩm</h1>-->
+<!--<table border="1px">-->
+<!--  <tr>-->
+<!--    <td>STT</td>-->
+<!--    <td>Name</td>-->
+<!--    <td>Price</td>-->
+<!--    <td>Category</td>-->
+<!--    <td> Chỉnh sửa</td>-->
+<!--  </tr>-->
+
+<!--  <tr *ngFor="let item of list; index as i">-->
+<!--    <td>{{i + 1}}</td>-->
+<!--    <td>{{item.name}}</td>-->
+<!--    <td>{{item.price}}</td>-->
+<!--    <td>{{item.category.name}}</td>-->
+<!--    <td><a [routerLink] ="['/product/edit',item.id]"> Edit</a></td>-->
+<!--    <td><a [routerLink] ="['/product/delete',item.id]"> Delete</a></td>-->
+<!--  </tr>-->
+
+<!--</table>-->
