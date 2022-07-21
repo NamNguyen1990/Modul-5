@@ -40,6 +40,9 @@ export class ProductService {
     return this.httpClient.get<Product>(this.API + `/searchname?name=${name}`);
   }
 
+  findByPriceBetween (from: number, to: number): Observable<Product> {
+    return this.httpClient.get<Product>(this.API + `/by-price-between?from=${from}&to=${to}`)
+  }
 
 
 }

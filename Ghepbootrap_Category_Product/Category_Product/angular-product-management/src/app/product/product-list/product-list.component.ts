@@ -15,7 +15,9 @@ export class ProductListComponent implements OnInit {
 
   productForm = new FormGroup({
     name: new FormControl(),
-    categoryId: new FormControl()
+    categoryId: new FormControl(),
+    from: new FormControl(),
+    to: new FormControl()
   });
 
   list: any;
@@ -55,6 +57,16 @@ export class ProductListComponent implements OnInit {
       console.log(data);
     });
   }
+
+  findByPriceBetween() {
+    const from = this.productForm.value.from
+    const to = this.productForm.value.to
+    this.productService.findByPriceBetween(from, to).subscribe(data => {
+      this.list= data;
+      console.log(data);
+    });
+  }
+
 
   deleteProduct(id : number) {
     this.productService.delete(id).subscribe(() => {

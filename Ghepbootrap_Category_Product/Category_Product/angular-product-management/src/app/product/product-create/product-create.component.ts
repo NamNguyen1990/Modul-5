@@ -22,7 +22,8 @@ export class ProductCreateComponent implements OnInit {
 
   listCategory:Category[] = [];
 
-  constructor(private httpClient: HttpClient,private router:Router,
+  constructor(private httpClient: HttpClient,
+              private router:Router,
               private productService: ProductService,
               private categoryService: CategoryService) { }
 
@@ -31,13 +32,6 @@ export class ProductCreateComponent implements OnInit {
       console.log(data)
       this.listCategory = data;
     })
-
-
-
-
-
-
-
 
     this.productService.findAll().subscribe((data)=> {
       console.log(data)

@@ -63,7 +63,7 @@ export class ProductEditComponent implements OnInit {
       category: {
         id: this.productForm.value.categoryId
       }
-    },
+    }
     this.productService.update(id, this.obj).subscribe(() => {
       this.router.navigate(['/product/list']);
       alert('Cập nhật thành công');
